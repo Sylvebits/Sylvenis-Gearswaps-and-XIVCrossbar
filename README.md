@@ -1,5 +1,7 @@
 HELLO! Sylveni of Asura here!
 
+UPDATE: I've updated the RDM LUA SIGNIFICANTLY, debugged some of the weaponset errors, and made sure resist sets were working properly. 
+
 The posted LUAs are considered MOSTLY functioning, and are designed around my use with XIVCrossbar - though they can be used without it. 
   Currently RUN, RDM, and DRK are considered complete, with COR being remade at the moment and to be posted.
 
