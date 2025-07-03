@@ -11,6 +11,7 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
+			send_command('send Sylveni /lockstyleset 3')
 end
 -------------------------------------------------------------------------------------------------------------------
 -- HUD Setup
@@ -100,7 +101,11 @@ function user_setup()
     state.HybridMode:options('Normal', 'PhysicalDef', 'MagicalDef')
     state.CastingMode:options('Normal', 'Resist')
     state.IdleMode:options('Single', 'DT', 'DW', 'DWDT')
-	state.WeaponSet = M{['description'] = 'DW Weapon Set', 'DWSword', 'DWClub', 'DWDagger', 'Single'}
+  state.WeaponSet = M{
+    ['description']='Weapon Set',
+    'Single','SCrocea','SClub','SDagger',     -- your Single‐mode sets
+    'DWSword','DWSwordCrocea','DWClubMax','DWDagger'  -- your Dual‐mode sets
+  }
 
 
     gear.default.obi_waist = "Sekhmet Corset"
@@ -120,7 +125,7 @@ function user_setup()
     if player.sub_job ~= 'NIN' then
         state.IdleMode:options('Single', 'DT')
     else
-        state.IdleMode:options('Single', 'DT', 'Single', 'DW', 'DWDT')
+        state.IdleMode:options('Single', 'DT', 'DW', 'DWDT')
     end
     update_hud()
 end
@@ -136,11 +141,11 @@ function init_gear_sets()
 -----------------------------------------------------------------------------
     sets.resting ={
 
-		ammo="Staunch Tathlum",
+		main="Daybreak",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-		body="Atrophy Tabard +2",
+		body="Atrophy Tabard +3",
 		hands="Malignance Gloves",
-		legs={ name="Chironic Hose", augments={'Pet: Mag. Acc.+24','Pet: STR+13','"Refresh"+1','Accuracy+20 Attack+20','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
+		legs={ name="Chironic Hose", augments={'STR+8','"Mag.Atk.Bns."+29','"Refresh"+2','Mag. Acc.+18 "Mag.Atk.Bns."+18',}},
 		feet="Nyame Sollerets",
 		neck="Null Loop",
 		waist="Carrier's Sash",
@@ -148,38 +153,38 @@ function init_gear_sets()
 		right_ear="Odnowa Earring +1",
 		left_ring="Defending Ring",
 		right_ring="Shneddick Ring",
-		back="Moonbeam Cape",
+	    back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
 	}
     sets.idle ={
 			main="Daybreak",
-			sub={ name="Forfend +1", augments={'Path: A',}},	
+			sub={ name="Forfend +1", augments={'Path: A',}},
 			ammo="Staunch Tathlum",
 			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 			body="Lethargy Sayon +2",
 			hands="Malignance Gloves",
-			legs="Nyame Flanchard",
-			feet="Nyame Sollerets",
+			legs={ name="Chironic Hose", augments={'STR+8','"Mag.Atk.Bns."+29','"Refresh"+2','Mag. Acc.+18 "Mag.Atk.Bns."+18',}},
+			feet="Malignance boots",
 			neck="Null Loop",
 			waist="Carrier's Sash",
 			left_ear="Eabani Earring",
 			right_ear="Odnowa Earring +1",
 			left_ring="Defending Ring",
 			right_ring="Shneddick Ring",
-			back="Moonbeam Cape",
+		    back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
 		}
     sets.idle.DW ={
 			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 			body="Lethargy Sayon +2",
 			hands="Malignance Gloves",
-			legs={ name="Chironic Hose", augments={'Pet: Mag. Acc.+24','Pet: STR+13','"Refresh"+1','Accuracy+20 Attack+20','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
-			feet="Nyame Sollerets",
+			    legs={ name="Chironic Hose", augments={'STR+8','"Mag.Atk.Bns."+29','"Refresh"+2','Mag. Acc.+18 "Mag.Atk.Bns."+18',}},
+			feet="Malignance boots",
 			neck="Null Loop",
 			waist="Carrier's Sash",
 			left_ear="Tuisto Earring",
 			right_ear="Odnowa Earring +1",
 			left_ring="Defending Ring",
 			right_ring="Shneddick Ring",
-			back="Moonbeam Cape",
+		    back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
 		}	
 	    sets.idle.DWDT ={
 			head="Malignance Chapeau",
@@ -193,7 +198,7 @@ function init_gear_sets()
 			right_ear="Odnowa Earring +1",
 			left_ring="Defending Ring",
 			right_ring="Shneddick Ring",
-			back="Moonbeam Cape",
+		    back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
 		}
 
     sets.idle.DT = {		
@@ -204,14 +209,14 @@ function init_gear_sets()
 			body="Malignance Tabard",
 			hands="Malignance Gloves",
 			legs="Nyame Flanchard",
-			feet="Nyame Sollerets",
+			feet="Malignance boots",
 			neck="Null Loop",
 			waist="Carrier's Sash",
 			left_ear="Eabani earring",
 			right_ear="Odnowa Earring +1",
 			left_ring="Defending Ring",
 			right_ring="Shneddick Ring",
-			back="Moonbeam Cape",
+		    back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
 		}	
     sets.idle.MDT = {} 
     sets.idle.Mage = {}
@@ -220,18 +225,18 @@ function init_gear_sets()
 -- Engaged Sets
 -----------------------------------------------------------------------------
     sets.engaged ={
-			main="Naegling",
+			--main="Naegling",
 		--	sub={ name="Forfend +1", augments={'Path: A',}},
 			range="Ullr",
 			head="Malignance Chapeau",
 			body="Malignance Tabard",
 			hands="Malignance Gloves",
 			legs="Jhakri Slops +2",
-			feet={ name="Carmine Greaves +1", augments={'Accuracy+12','DEX+12','MND+20',}},
+			feet="Malignance boots",
 			neck="Null Loop",
 			waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 			left_ear="Sherida Earring",
-			right_ear="Cessance Earring",
+			right_ear="Telos Earring",
 			left_ring="Ilabrat Ring",
 			right_ring="Chirich Ring +1",
 			back="Null Shawl",
@@ -242,18 +247,34 @@ function init_gear_sets()
 			body="Malignance Tabard",
 			hands="Malignance Gloves",
 			legs={ name="Carmine Cuisses +1", augments={'Accuracy+20','Attack+12','"Dual Wield"+6',}},
-			feet={ name="Carmine Greaves +1", augments={'Accuracy+12','DEX+12','MND+20',}},
+			feet="Malignance boots",
+			--neck={ name="Dls. Torque +1", augments={'Path: A',}},			
 			neck="Null Loop",
 			waist={ name="Sailfi Belt +1", augments={'Path: A',}},
 			left_ear="Sherida Earring",
 			right_ear="Eabani Earring",
 			left_ring="Ilabrat Ring",
 			right_ring="Chirich Ring +1",
+			--back="Aptitude mantle",	
 			back="Null Shawl",
 		}
-	sets.engaged.DWSword = set_combine(sets.engaged.DW, {main="Naegling",sub="Sakpata's Sword"})
-	sets.engaged.DWClub = set_combine(sets.engaged.DW, {main="Daybreak",sub="Sakpata's Sword"})
-	sets.engaged.DWDagger = set_combine(sets.engaged.DW, {main="Tauret",sub="Daybreak"})
+		
+		
+		
+	sets.engaged.Single = set_combine(sets.engaged, {main="Naegling",sub={ name="Forfend +1", augments={'Path: A',}},})
+	sets.engaged.SCrocea = set_combine(sets.engaged, {main="Crocea Mors",sub="Ammurapi shield"})
+	sets.engaged.SClub = set_combine(sets.engaged, {main="Maxentius",sub="Ammurapi shield"})
+	sets.engaged.SDagger = set_combine(sets.engaged, {main="Tauret",sub="Ammurapi shield"})
+	
+	sets.engaged.DWSword = set_combine(sets.engaged.DW, {main="Naegling",sub={ name="Demers. Degen +1", augments={'Path: A',}},})
+	sets.engaged.DWSwordCrocea = set_combine(sets.engaged.DW, {main="Crocea Mors",sub="Daybreak"})
+	sets.engaged.DWClubMax = set_combine(sets.engaged.DW, {main="Maxentius",sub="Naegling"})
+	sets.engaged.DWDagger = set_combine(sets.engaged.DW, {main="Tauret", sub="Daybreak",})
+	
+	
+	
+	--sets.engaged.DWDagger = set_combine(sets.engaged.DW, {    main="Esoteric Athame",
+    --sub="Ceremonial Dagger",})
 	
 	sets.engaged.Mage = {}
     sets.engaged.Defense = {} --Purposefully unused
@@ -264,44 +285,104 @@ function init_gear_sets()
     sets.precast.WS = {}
 	
     sets.precast.WS['Requiescat'] = {}
-
-    sets.precast.WS['Sanguine Blade'] = {}
-
-	sets.precast.WS['Savage Blade'] = {    
+	
+	sets.precast.WS['Chant du Cygne'] = {    
 			range="Ullr",
-			head="Nyame Helm",
-			body="Volte Harness",
+			head="Malignance Chapeau",
+			body="Malignance Tabard",
 			hands="Jhakri Cuffs +2",
 			legs="Jhakri Slops +2",
 			feet="Leth. Houseaux +2",
-			neck="Anu Torque",
-			waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-			left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
-			right_ear="Sherida Earring",
+			neck="Fotia Gorget",
+			waist="Fotia Belt",
+			left_ear="Sherida Earring",
+			right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
 			left_ring="Ilabrat Ring",
 			right_ring="Petrov Ring",
-			back="Null Shawl",
-		}	
+			back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+		}
+
+	sets.precast.WS['Savage Blade'] = {    
+			range="Ullr",
+			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+			body="Lethargy Sayon +2",
+			hands="Atrophy Gloves +3",
+			legs="Jhakri Slops +2",
+			feet="Leth. Houseaux +2",
+			neck="Caro Necklace",
+			waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+			left_ear="Ishvara Earring",
+			right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+			left_ring="Rufescent Ring",
+			right_ring="Ilabrat Ring",
+			back={ name="Sucellos's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+9','Weapon skill damage +10%',}},
+		}
+   sets.precast.WS['Sanguine Blade'] = {    
+			range="Ullr",
+			head="Pixie Hairpin +1",
+			body="Lethargy Sayon +2",
+			hands="Jhakri Cuffs +2",
+			legs="Leth. Fuseau +2",
+			feet="Leth. Houseaux +2",
+			neck="Mizu. Kubikazari",
+			waist="Refoccilation Stone",
+			left_ear="Friomisi Earring",
+			right_ear="Malignance Earring",
+			right_ring="Metamor. Ring +1",
+			left_ring="Archon Ring",
+			back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+5','Weapon skill damage +10%',}},
+		}
+   sets.precast.WS['Red Lotus Blade'] = {    
+			range="Ullr",
+			head="Leth. Chappel +2",
+			body="Lethargy Sayon +2",
+			hands="Jhakri Cuffs +2",
+			legs="Leth. Fuseau +2",
+			feet="Leth. Houseaux +2",
+			neck="Mizu. Kubikazari",
+			waist="Refoccilation Stone",
+			left_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+			right_ear="Malignance Earring",
+			left_ring="Metamor. Ring +1",
+			back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+5','Weapon skill damage +10%',}},
+		}
+   sets.precast.WS['Seraph Blade'] = {    
+			head="Leth. Chappel +2",
+			body="Lethargy Sayon +2",
+			hands="Jhakri Cuffs +2",
+			legs="Leth. Fuseau +2",
+			feet="Leth. Houseaux +2",
+			neck="Mizu. Kubikazari",
+			waist="Refoccilation Stone",
+			left_ear="Malignance Earring",
+			right_ear={ name="Moonshade Earring", augments={'Accuracy+4','TP Bonus +250',}},
+			left_ring="Rufescent Ring",
+			right_ring="Metamor. Ring +1",
+			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+5','Weapon skill damage +10%',}},
+		}
 	--------------------------------------
 			--* PRECAST SETS *--
     --------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Chainspell'] = {body="Vitivation Tabard +1"}
+    sets.precast.JA['Chainspell'] = {body="Vitivation Tabard +2"}
     
-    sets.precast.FC = {
-			head="Atro. Chapeau +2",
-			body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
-			legs="Aya. Cosciales +2",
-			feet={ name="Carmine Greaves +1", augments={'Accuracy+12','DEX+12','MND+20',}},
-			neck="Voltsurge Torque",
+    sets.precast.FC ={
+			main={ name="Crocea Mors", augments={'Path: C',}},
+			sub="Sakpata's Sword",
+			range="Ullr",
+			head="Atrophy Chapeau +3",
+			body={ name="Viti. Tabard +2", augments={'Enhances "Chainspell" effect',}},
+			hands="Malignance Gloves",
+			legs="Nyame Flanchard",
+			feet="Malignance Boots",
+			neck="Null Loop",
 			waist="Witful Belt",
-			left_ear="Malignance Earring",
-			right_ear="Loquac. Earring",
-			left_ring="Kishar Ring",
-			right_ring="Lebeche Ring",
-			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}},
-	}
+			left_ring="Lebeche Ring",
+			right_ring="Defending Ring",
+			back={ name="Sucellos's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Damage taken-5%',}},
+		}
+		
 	sets.precast.ENFEEBLING = set_combine(sets.precast.FC, {head="Leth. Chappel +2",})   
 	
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty,body="Twilight Cloak"})
@@ -329,7 +410,7 @@ function init_gear_sets()
 		sets.buff.ComposureOther ={
 				head="Leth. Chappel +2",
 				body="Lethargy Sayon +2",
-				hands="Atrophy Gloves +2",
+				hands="Atrophy Gloves +3",
 				legs="Leth. Fuseau +2",
 				feet="Leth. Houseaux +2",
 			}
@@ -338,13 +419,13 @@ function init_gear_sets()
 				hands="Leth. Gantherots +2"		
 			}	
 			
-			--570+ Enhancing Skill--		
+			--599 Enhancing Skill--		
 		sets.midcast['Enhancing Magic'] = set_combine(sets.base,{
 				sub={ name="Forfend +1", augments={'Path: A',}},
 				head={ name="Carmine Mask", augments={'Accuracy+15','Mag. Acc.+10','"Fast Cast"+3',}},
-				body={ name="Viti. Tabard +1", augments={'Enhances "Chainspell" effect',}},
-				hands={ name="Viti. Gloves +1", augments={'Enhancing Magic duration',}},
-				legs="Atrophy Tights +2",
+				body={ name="Viti. Tabard +2", augments={'Enhances "Chainspell" effect',}},
+				hands={ name="Viti. Gloves +2", augments={'Enhancing Magic duration',}},
+				legs="Atrophy Tights +3",
 				feet="Leth. Houseaux +2",
 				neck="Incanter's Torque",
 				waist="Olympus Sash",
@@ -354,13 +435,14 @@ function init_gear_sets()
 				back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +4','Enha.mag. skill +9','Enh. Mag. eff. dur. +19',}},
 			})	
 			
-			--505 Enhancing Skill--
+			--523 Enhancing Skill--
 		sets.midcast.EnhancingDuration =  set_combine(sets.midcast['Enhancing Magic'],{
-				head="Leth. Chappel +2",
-				body="Lethargy Sayon +2",
-				hands="Atrophy Gloves +2",
-								waist="Embla Sash",
-				legs="Leth. Fuseau +2",
+				neck={ name="Dls. Torque +1", augments={'Path: A',}},
+				sub="Ammurapi shield",
+				head={ name="Telchine Cap", augments={'Enh. Mag. eff. dur. +9',}},
+				legs={ name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +9',}},
+				hands="Atrophy Gloves +3",
+				waist="Embla Sash",
 				feet="Leth. Houseaux +2",
 				back={ name="Ghostfyre Cape", augments={'Enfb.mag. skill +4','Enha.mag. skill +9','Enh. Mag. eff. dur. +19',}},
 			})			
@@ -415,18 +497,18 @@ function init_gear_sets()
 -- Enhancing Magic
 -----------------------------------------------------------------------------
 	
-	sets.midcast.Temper = set_combine(sets.midcast.EnhancingDuration)
+	sets.midcast.Temper = set_combine(sets.midcast['Enhancing Magic'])
 		
     sets.midcast.Refresh = set_combine(
 		sets.midcast.EnhancingDuration, 
 			{legs="Leth. Fuseau +2", 
-				body="Atrophy Tabard +2",})   
+				body="Atrophy Tabard +3",})   
 			
 	sets.midcast.RefreshSelf = set_combine(
 		sets.midcast.EnhancingDuration, 
 			{legs="Leth. Fuseau +2", 
 				waist="Gishdubar Sash",
-				body="Atrophy Tabard +2",})   
+				body="Atrophy Tabard +3",})   
 
     sets.midcast.Stoneskin= set_combine(
 		sets.midcast['Enhancing Magic'], 
@@ -434,21 +516,29 @@ function init_gear_sets()
 				legs="Shedir seraweels",})
 				
 	sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration)
-	
+					
+	sets.midcast.Gain = set_combine(sets.midcast.EnhancingDuration, 
+			{hands={ name="Viti. Gloves +2", augments={'Enhancing Magic duration',}},}) 
+			
 	sets.midcast.Haste = set_combine(sets.midcast.EnhancingDuration)
+	sets.midcast['Shell V'] = set_combine(sets.midcast.EnhancingDuration)
+	sets.midcast['Protect V'] = set_combine(sets.midcast.EnhancingDuration)
 	
 	sets.midcast.PhalanxSelf = set_combine(
 		sets.midcast['Enhancing Magic'], 
 			{main="Sakpata's Sword",
-				ammo="Staunch Tathlum",
+				neck={ name="Dls. Torque +1", augments={'Path: A',}},
+				sub="Ammurapi shield",
 				body={ name="Taeon Tabard", augments={'Spell interruption rate down -8%','Phalanx +3',}},
 				hands={ name="Taeon Gloves", augments={'Spell interruption rate down -10%','Phalanx +3',}},
 				legs={ name="Taeon Tights", augments={'Spell interruption rate down -7%','Phalanx +3',}},
 				feet={ name="Taeon Boots", augments={'Spell interruption rate down -10%','Phalanx +3',}},
-				waist="Gishdubar Sash",})
+				waist="Embla Sash",
+				})
 				
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'],
-			{legs="Shedir seraweels",})
+			{waist="Embla Sash",
+			legs="Shedir seraweels",})
 	
 	
 -----------------------------------------------------------------------------
@@ -457,10 +547,10 @@ function init_gear_sets()
 	
 	sets.midcast['Enfeebling Magic'] ={
 			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-			body="Atrophy Tabard +2",
+			body="Atrophy Tabard +3",
 			hands="Leth. Ganth. +2",
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-			feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 			left_ring="Stikini Ring",
 			right_ring="Stikini Ring",
 		}
@@ -471,55 +561,66 @@ function init_gear_sets()
 	-- Enfeebling Skill Based
 	--------------------------
 	sets.midcast['Distract II'] ={
-			main="Daybreak",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-			body="Lethargy Sayon +2",
+			body="Atrophy Tabard +3",
 			hands="Leth. Ganth. +2",
 			legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-			feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 			neck="Null Loop",
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
 			left_ring="Stikini Ring",
 			right_ring="Stikini Ring",
-			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}},
+			back='null shawl',
 		}
+
+		
 	sets.midcast['Frazzle II'] ={
-			main="Daybreak",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-			body="Lethargy Sayon +2",
+			body="Atrophy Tabard +3",
 			hands="Leth. Ganth. +2",
 			legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-			feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 			neck="Null Loop",
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
 			left_ring="Stikini Ring",
 			right_ring="Stikini Ring",
-			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}},
+			back='null shawl',
 		}
-	sets.midcast['Distract III'] ={}
-	sets.midcast['Frazzle III'] = {}
+	sets.midcast['Distract III'] = set_combine(sets.midcast['Distract II'],{
+			body="Lethargy Sayon +2",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
+			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}}
+			})
+	
+	sets.midcast['Frazzle III'] = set_combine(sets.midcast['Frazzle II'],{
+			body="Lethargy Sayon +2",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
+			back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}}
+			})
 
 	-----------------------------
 	-- Magic Accuracy(.resist) & Duration
 	-----------------------------
 	sets.midcast['Sleep'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -527,19 +628,24 @@ function init_gear_sets()
 			right_ring="Kishar Ring",
 			back="Null Shawl",
 		}
-	sets.midcast['Sleep'].resist = set_combine(sets.midcast['Sleep'],{	right_ring="Stikini Ring", 		
+	sets.midcast['Sleep'].resist = set_combine(sets.midcast['Sleep'],{
+			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+			body="Atrophy Tabard +3",		
+			neck="Null loop",
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+			right_ring="Stikini Ring", 		
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},})
 			
 	sets.midcast['Sleep II'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -547,19 +653,25 @@ function init_gear_sets()
 			right_ring="Kishar Ring",
 			back="Null Shawl",
 		}
-	sets.midcast['Sleep II'].resist = set_combine(sets.midcast['Sleep II'],{	right_ring="Stikini Ring", 		
+		
+	sets.midcast['Sleep II'].resist = set_combine(sets.midcast['Sleep II'],{
+			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+			body="Atrophy Tabard +3",		
+			neck="Null loop",
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+			right_ring="Stikini Ring", 		
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},})
-	
+			
 	sets.midcast['Silence'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -567,19 +679,25 @@ function init_gear_sets()
 			right_ring="Kishar Ring",
 			back="Null Shawl",
 		}
-	sets.midcast['Silence'].resist = set_combine(sets.midcast['Silence'],{	right_ring="Stikini Ring", 		
+		
+	sets.midcast['Silence'].resist = set_combine(sets.midcast['Silence'],{
+			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+			body="Atrophy Tabard +3",		
+			neck="Null loop",
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+			right_ring="Stikini Ring", 		
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},})
 	
 	sets.midcast['Bind'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -587,19 +705,25 @@ function init_gear_sets()
 			right_ring="Kishar Ring",
 			back="Null Shawl",
 		}
-	sets.midcast['Bind'].resist = set_combine(sets.midcast['Bind'],{	right_ring="Stikini Ring", 		
+		
+	sets.midcast['Bind'].resist = set_combine(sets.midcast['Bind'],{
+			head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+			body="Atrophy Tabard +3",		
+			neck="Null loop",
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+			right_ring="Stikini Ring", 		
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},})
 			
 	sets.midcast['Dia III'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -609,16 +733,16 @@ function init_gear_sets()
 		}
 	
 	sets.midcast['Dispel'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Gantherots +2",
 			waist="Luminary Sash",
 			legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-			feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-			neck="Null Loop",
+			feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			left_ear="Crep. Earring",
 			right_ear="Malignance Earring",
 			left_ring="Stikini Ring",
@@ -626,15 +750,15 @@ function init_gear_sets()
 			back="Null Shawl",
 	}	
 	sets.midcast['Break'] ={
-			main="Naegling",
-			sub={ name="Forfend +1", augments={'Path: A',}},
+			main="Crocea Mors",
+			sub="Ammurapi shield",
 			range="Ullr",
 			head="Leth. Chappel +2",
 			body="Lethargy Sayon +2",
 			hands="Leth. Ganth. +2",
 			legs="Leth. Fuseau +2",
 			feet="Leth. Houseaux +2",
-			neck="Null Loop",
+			neck={ name="Dls. Torque +1", augments={'Path: A',}},
 			waist="Luminary Sash",
 			left_ear="Malignance Earring",
 			right_ear="Snotra Earring",
@@ -647,15 +771,15 @@ function init_gear_sets()
 	-- 	Mind-Scaling Spells 
 	-----------------------------	
 	sets.midcast['Slow'] ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+		sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck={ name="Dls. Torque +1", augments={'Path: A',}},
 		waist="Luminary Sash",
 		right_ear="Malignance Earring",
 		left_ear="Snotra Earring",
@@ -665,15 +789,15 @@ function init_gear_sets()
 }
 		--Resistant Set
 	sets.midcast['Slow'].resist ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+		sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck="Null loop",
 		waist="Luminary Sash",
 		right_ear="Malignance Earring",
 		left_ear="Snotra Earring",
@@ -683,15 +807,15 @@ function init_gear_sets()
 }
 		
     sets.midcast['Slow II'] ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+			sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck={ name="Dls. Torque +1", augments={'Path: A',}},
 		waist="Luminary Sash",
 		right_ear="Malignance Earring",
 		left_ear="Snotra Earring",		
@@ -701,15 +825,15 @@ function init_gear_sets()
 }
 		--Resistant Set
 	sets.midcast['Slow II'].resist ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+			sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck="Null loop",
 		waist="Luminary Sash",
 		right_ear="Malignance Earring",
 		left_ear="Snotra Earring",
@@ -719,15 +843,15 @@ function init_gear_sets()
 }
 
 	sets.midcast['Paralyze'] ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+			sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck={ name="Dls. Torque +1", augments={'Path: A',}},
 		waist="Luminary Sash",
 		left_ear="Snotra Earring",
 		right_ear="Malignance Earring",
@@ -737,15 +861,15 @@ function init_gear_sets()
 }
 
 	sets.midcast['Paralyze II'] ={
-		main="Naegling",
-		sub={ name="Forfend +1", augments={'Path: A',}},
+		main="Daybreak",
+			sub="Ammurapi shield",
 		range="Ullr",
 		head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 		body="Lethargy Sayon +2",
 		hands="Leth. Gantherots +2",
 		legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-		feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-		neck="Dls. Torque +1",
+		feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+		neck={ name="Dls. Torque +1", augments={'Path: A',}},
 		waist="Luminary Sash",
 		left_ear="Snotra Earring",
 		right_ear="Malignance Earring",
@@ -755,15 +879,15 @@ function init_gear_sets()
 }
 		--Resistant Set
 	sets.midcast['Paralyze'].resist ={
-				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				main="Daybreak",
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 				body="Lethargy Sayon +2",
 				hands="Leth. Gantherots +2",
 				legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-				neck="Dls. Torque +1",
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+				neck="Null loop",
 				waist="Luminary Sash",
 				left_ear="Snotra Earring",
 				right_ear="Malignance Earring",
@@ -773,15 +897,15 @@ function init_gear_sets()
 		}
 		--Resistant Set
 	sets.midcast['Paralyze II'].resist ={
-				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				main="Daybreak",
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
-				body="Lethargy Sayon +2",
+				body="Atrophy Tabard +3",	
 				hands="Leth. Gantherots +2",
 				legs={ name="Chironic Hose", augments={'Mag. Acc.+28','MND+13','"Mag.Atk.Bns."+4',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-				neck="Dls. Torque +1",
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+				neck="Null loop",
 				waist="Luminary Sash",
 				left_ear="Snotra Earring",
 				right_ear="Malignance Earring",
@@ -790,15 +914,15 @@ function init_gear_sets()
 				back={ name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','Spell interruption rate down-10%',}},
 		}
 	sets.midcast['Addle'] ={
-				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				main="Daybreak",
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 				body="Lethargy Sayon +2",
 				hands="Leth. Gantherots +2",
 				legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-				neck="Dls. Torque +1",
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+				neck={ name="Dls. Torque +1", augments={'Path: A',}},
 				waist="Luminary Sash",
 				left_ear="Snotra Earring",		
 				right_ear="Malignance Earring",
@@ -808,15 +932,15 @@ function init_gear_sets()
 		}	
 		
 	sets.midcast['Addle II'] ={
-				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				main="Daybreak",
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 				body="Lethargy Sayon +2",
 				hands="Leth. Gantherots +2",
 				legs={ name="Psycloth Lappas", augments={'Mag. Acc.+10','Spell interruption rate down +15%','MND+7',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-				neck="Dls. Torque +1",
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+				neck={ name="Dls. Torque +1", augments={'Path: A',}},
 				waist="Luminary Sash",
 				left_ear="Snotra Earring",
 				right_ear="Malignance Earring",
@@ -829,13 +953,13 @@ function init_gear_sets()
 	-----------------------------	
 	sets.midcast['Blind'] ={
 				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 				body="Lethargy Sayon +2",
 				hands="Leth. Gantherots +2",
 				legs={ name="Psycloth Lappas", augments={'MP+50','INT+7','"Conserve MP"+6',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
 				neck="Dls. Torque +1",
 				waist="Acuity Belt +1",
 				left_ear="Snotra Earring",
@@ -846,14 +970,14 @@ function init_gear_sets()
 		}	
 	sets.midcast['Blind II'] ={
 				main="Naegling",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				sub="Ammurapi shield",
 				range="Ullr",
 				head={ name="Viti. Chapeau +2", augments={'Enfeebling Magic duration','Magic Accuracy',}},
 				body="Lethargy Sayon +2",
 				hands="Leth. Gantherots +2",
 				legs={ name="Psycloth Lappas", augments={'MP+50','INT+7','"Conserve MP"+6',}},
-				feet={ name="Vitiation Boots +1", augments={'Immunobreak Chance',}},
-				neck="Dls. Torque +1",
+				feet={ name="Vitiation Boots +3", augments={'Immunobreak Chance',}},
+				neck={ name="Dls. Torque +1", augments={'Path: A',}},
 				waist="Acuity Belt +1",
 				left_ear="Snotra Earring",
 				right_ear="Malignance Earring",
@@ -873,12 +997,12 @@ function init_gear_sets()
 -----------------------------------------------------------------------------
     sets.midcast['Elemental Magic'] ={
 				main="Daybreak",
-				sub={ name="Forfend +1", augments={'Path: A',}},
+				sub="Ammurapi shield",
 				head="Leth. Chappel +2",
 				body="Lethargy Sayon +2",
 				hands="Leth. Ganth. +2",
 				legs="Leth. Fuseau +2",
-				feet="Leth. Houseaux +2",
+				feet="Vitiation Boots +3",
 				neck="Null Loop",
 				waist="Acuity Belt +1",
 				left_ear="Friomisi Earring",
@@ -887,8 +1011,8 @@ function init_gear_sets()
 				right_ring="Shneddick Ring",
 				back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
 			}
-	sets.midcast['Elemental Magic'].DW =set_combine(sets.midcast['Elemental Magic'],{main="Daybreak", sub="Naegling"})	
-    sets.midcast['Elemental Magic'].Resist = {}
+	sets.midcast['Elemental Magic'].DW =set_combine(sets.midcast['Elemental Magic'],{main="Naegling", sub="Daybreak"})	
+    sets.midcast['Elemental Magic'].Resist  = set_combine(sets.midcast['Elemental Magic'].DW,{main="Naegling", sub="Daybreak"})
     
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {head=empty,body="Twilight Cloak"})
 
@@ -912,34 +1036,88 @@ end
 -------------------------------------------------------------------------------------------------------------------
 function job_precast(spell, action, spellMap, eventArgs)
     last_spell_cast = spell
+
+    if spell.action_type == 'Magic' then
+        -- Decide whether to lock or unlock weapon slots:
+        if player.status ~= 'Engaged' or state.CastingMode.current == 'Resist' then
+            enable('main','sub','range','ammo')
+        else
+            -- In-combat & Normal mode: keep weapons locked
+            disable('main','sub','range','ammo')
+        end
+
+        -- Equip the correct precast set
+        if spell.skill == 'Enfeebling Magic' then
+            equip(sets.precast.ENFEEBLING)
+            eventArgs.handled = true
+        else
+            equip(sets.precast.FC)
+        end
+
+        return
+    end
+
+    -- Non-magic spells fall back to your engage logic:
+    if player.status == 'Engaged' then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+
+
     if spell.skill == 'Enfeebling Magic' then
         equip(sets.precast.ENFEEBLING)
-        eventArgs.handled = true -- Prevents Mote from equipping FC
+        eventArgs.handled = true
     end
--- Lock slots during spellcasting in Dual mode, except when in Resist mode with a defined resist set
-if state.OffenseMode.current == 'Dual' and spell.action_type == 'Magic' then
-    local has_resist_set = sets.midcast[spell.english] and sets.midcast[spell.english].resist
-    if not (state.CastingMode.current == 'Resist' and has_resist_set) then
-        disable('main', 'sub', 'range', 'ammo')
-    else
-        enable('main', 'sub', 'range', 'ammo') -- ensure fully unlocked for max accuracy
+
+    if spell.action_type == 'Magic' then
+        equip(sets.precast.FC)
+    end
+
+
+    -- 4) **New**: Lock main/sub/range/ammo on **any** spellcast
+    --    unless you’re in Resist mode **and** you actually have a .resist set for that spell.
+    if spell.action_type == 'Magic' then
+        local has_resist_set = sets.midcast[spell.english] and sets.midcast[spell.english].resist
+        if state.CastingMode.value == 'Resist' and has_resist_set then
+            enable('main','sub','range','ammo')
+        else
+            disable('main','sub','range','ammo')
+        end
     end
 end
 
-
+-- ------------------------------------------------------------------
+-- Immediately after any cast, always re-unlock everything so your
+-- WeaponSet toggle still works without forcing OffenseMode flips.
+-- ------------------------------------------------------------------
+function job_aftercast(spell, action, spellMap, eventArgs)
+    enable('main','sub','range','ammo')
 end
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-if spell.skill == 'Elemental Magic' then
-    if state.OffenseMode.current == 'Dual' and player.status == 'Idle' then
-        equip(sets.midcast['Elemental Magic'].DW)
-    else
-        equip(sets.midcast['Elemental Magic'])
+    if state.CastingMode.current == 'Resist'
+      and sets.midcast[spell.english]
+      and sets.midcast[spell.english].resist then
+
+        equip(sets.midcast[spell.english].resist)
+        return
+    end   
+   if spell.skill == 'Elemental Magic' then
+        if state.CastingMode.current == 'Resist'
+           and sets.midcast['Elemental Magic'].Resist then
+
+            equip(sets.midcast['Elemental Magic'].Resist)
+
+        elseif state.OffenseMode.current == 'Dual' and player.status == 'Idle' then
+            equip(sets.midcast['Elemental Magic'].DW)
+        else
+            equip(sets.midcast['Elemental Magic'])
+        end
     end
-end
     -- Enfeebling Magic resist handling
     if spell.skill == 'Enfeebling Magic' then
         if state.CastingMode.value == 'Resist' and sets.midcast[spell.english] and sets.midcast[spell.english].resist then
@@ -966,16 +1144,18 @@ end
 
         elseif spell.english == 'Aquaveil' then
             equip(sets.midcast.Aquaveil)
-
         elseif spell.english == 'Temper' then
             equip(sets.midcast.Temper)
         elseif spell.english == 'Haste II' then
             equip(sets.midcast.Haste)		
 		elseif spell.english:startswith('Gain') then
-            equip(sets.midcast.EnhancingDuration)
+            equip(sets.midcast.Gain)
         elseif spell.english == 'Stoneskin' then
             equip(sets.midcast.Stoneskin)
-
+		elseif spell.english:startswith('Protect') then
+            equip(sets.midcast.EnhancingDuration)			
+		elseif spell.english:startswith('Shell') then
+            equip(sets.midcast.EnhancingDuration)
         else
             -- Default fallback Enhancing Magic
             equip(sets.midcast['Enhancing Magic'])
@@ -1003,14 +1183,21 @@ end
 
 
 
+
+
 -------------------------------------------------------------------------------------------------------------------
 -- HUD Functions
 -------------------------------------------------------------------------------------------------------------------
 
 
-function job_aftercast(spell, action, spellMap, eventArgs)
-    -- No action needed anymore — we handle resists in the packet listener
-end
+
+--function job_aftercast(spell, action, spellMap, eventArgs)
+    -- Always re-unlock our weapon slots after casting in Dual-wield Normal mode
+   -- if state.OffenseMode.current == 'Dual'
+    --and state.CastingMode.current ~= 'Resist' then
+    --    enable('main','sub','range','ammo')
+  --  end
+--end
 
 function start_resist_flicker()
     local flicker_on = true
@@ -1049,44 +1236,41 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Offense Mode' then
-if newValue == 'Dual' then
-    enable('main','sub','range')
-    state.WeaponSet:set('DWSword')
-    state.IdleMode:set('DW')
+function job_state_change(field, new, old)
+  if field == 'Offense Mode' then
+    if new == 'Single' then
+      -- only single‐mode slots
+      state.WeaponSet:options('Single','SCrocea','SClub','SDagger')
+      state.WeaponSet:set('Single')
+      state.IdleMode:set('Single')
+    else
+      -- only dual‐mode slots
+      state.WeaponSet:options('DWSword','DWSwordCrocea','DWClubMax','DWDagger')
+      state.WeaponSet:set('DWSword')
+      state.IdleMode:set('DW')
+    end
+
+    enable('main','sub','range','ammo')
+    play_toggle_sound()
     update_hud()
-        else
-    if newValue == 'Single' then
-        enable('main','sub','range','ammo')  -- Unlock slots when going to Single mode
+  end
+
+    if stateField == 'WeaponSet' then
+        local ws = select_engaged_set()
+        if ws then
+            -- build the table of weapons to equip
+            local weapon_slots = {}
+            if ws.main then weapon_slots.main = ws.main end
+            if ws.sub  then weapon_slots.sub  = ws.sub  end
+
+            -- unlock all slots, equip, then re-lock
+            enable('main','sub','range','ammo')
+            equip(weapon_slots)
+            disable('main','sub','range','ammo')
+        end
     end
 
-    if state.WeaponSet and state.WeaponSet.value ~= 'Single' then
-        state.WeaponSet:set('Single')
-    end
-    state.IdleMode:set('Single')
-end
-play_toggle_sound()
-    end
-if stateField == 'WeaponSet' then
-    local ws = select_engaged_set()
-    if ws then
-        local weapon_slots = {}
-        if ws.main then weapon_slots.main = ws.main end
-        if ws.sub then weapon_slots.sub = ws.sub end
-
-        enable('main','sub')
-        equip(weapon_slots)
-        disable('main','sub')
-    end
-
-end
-
-    -- Automatically engage DW set if subjob is NIN
-    if stateField == 'Offense Mode' and player.sub_job == 'NIN' and newValue ~= 'Dual' then
-        equip(sets.engaged.DW)
-    end
-
+    -- the rest of your existing handler…
     if stateField == 'IdleMode' or stateField == 'HybridMode' or stateField == 'CastingMode' then
         handle_equipping_gear(player.status)
     end
@@ -1094,25 +1278,27 @@ end
     update_hud()
 end
 function customize_melee_set(meleeSet)
-    if player.sub_job == 'NIN' and state.OffenseMode.current == 'Dual' then
-        if state.WeaponSet.current == 'DWClub' and sets.engaged.DWClub then
-            meleeSet = sets.engaged.DWClub
-        elseif state.WeaponSet.current == 'DWDagger' and sets.engaged.DWDagger then
-            meleeSet = sets.engaged.DWDagger
-        elseif sets.engaged.DWSword then
-            meleeSet = sets.engaged.DWSword
-        else
-            meleeSet = sets.engaged.DW
-        end
-
-    elseif state.OffenseMode.current == 'Mage' and sets.engaged.Mage then
-        meleeSet = sets.engaged.Mage
-    else
-        meleeSet = sets.engaged
+  if state.OffenseMode.current == 'Single' then
+    if state.WeaponSet.current == 'SCrocea'   then return sets.engaged.SCrocea
+    elseif state.WeaponSet.current == 'SClub' then return sets.engaged.SClub
+    elseif state.WeaponSet.current == 'SDagger'then return sets.engaged.SDagger
+    else                                         return sets.engaged.Single
     end
 
-    return meleeSet
+  elseif player.sub_job == 'NIN' and state.OffenseMode.current == 'Dual' then
+    if state.WeaponSet.current == 'DWSwordCrocea' then return sets.engaged.DWSwordCrocea
+    elseif state.WeaponSet.current == 'DWDagger'    then return sets.engaged.DWDagger
+    elseif state.WeaponSet.current == 'DWClubMax'   then return sets.engaged.DWClubMax
+    else                                              return sets.engaged.DWSword
+    end
+
+  elseif state.OffenseMode.current == 'Mage' then
+    return sets.engaged.Mage
+  else
+    return sets.engaged
+  end
 end
+
 
 function job_status_change(newStatus, oldStatus, eventArgs)
     if newStatus == 'Engaged' then
@@ -1127,10 +1313,12 @@ function select_engaged_set()
         if state.OffenseMode.current == 'Single' and sets.engaged then
         return sets.engaged
 		elseif player.sub_job == 'NIN' and state.OffenseMode.current == 'Dual' then
-        if state.WeaponSet.current == 'DWClub' and sets.engaged.DWClub then
-            return sets.engaged.DWClub
+        if state.WeaponSet.current == 'DWSwordCrocea' and sets.engaged.DWSwordCrocea then
+            return sets.engaged.DWSwordCrocea
         elseif state.WeaponSet.current == 'DWDagger' and sets.engaged.DWDagger then
             return sets.engaged.DWDagger
+        elseif state.WeaponSet.current == 'DWClubMax' and sets.engaged.DWClubMax then
+            return sets.engaged.DWClubMax			
         elseif sets.engaged.DWSword then
             return sets.engaged.DWSword
         else
@@ -1262,4 +1450,3 @@ windower.register_event('action', function(act)
         end
     end
 end)
-
