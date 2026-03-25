@@ -1,3 +1,5 @@
+Update March 2026: In the process of updating these :)
+
 HELLO! Sylveni of Asura here!
 
 UPDATE: I've updated the RDM LUA SIGNIFICANTLY, debugged some of the weaponset errors, and made sure resist sets were working properly. 
